@@ -1,0 +1,45 @@
+{
+  "name": "instagram-clone",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://toogreen.ca/instagreen/",
+  "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "firebase": "^7.24.0",
+    "get-user-locale": "^1.4.0",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "material-ui-popup-state": "^1.9.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-expanding-textarea": "^2.3.2",
+    "react-instagram-embed": "^1.5.0",
+    "react-lazyload": "^3.2.0",
+    "react-linkify": "^1.0.0-alpha",
+    "react-scripts": "^3.4.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
