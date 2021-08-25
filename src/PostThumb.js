@@ -9,8 +9,7 @@ function PostThumb({postId, imageUrl}) {
             <div className="post__thumbcontainer">
  
             { 
-            // Check if the image is a video instead of an image, and if so, use the VIDEO tag instead
-            (imageUrl.includes(".mp4")) || (imageUrl.includes(".MP4")) || (imageUrl.includes(".mov")) || (imageUrl.includes(".MOV")) 
+                      (imageUrl.includes(".mp4")) || (imageUrl.includes(".MP4")) || (imageUrl.includes(".mov")) || (imageUrl.includes(".MOV")) 
             ? 
                 (
                 <div className="post__thumb">
@@ -22,7 +21,7 @@ function PostThumb({postId, imageUrl}) {
                 )
                 : 
                 (
-                // If it is NOT a video, load it as an image:
+                
                 <div className="post__thumb">
                     <img className="post__image" src={imageUrl} alt="" />
                 </div>
