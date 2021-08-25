@@ -11,14 +11,14 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([]);
 
-    // Added this to make Linkify links open up in a new tab by default, and add the other AODA necessary parameters as well
+   
     const componentDecorator = (href, text, key) => (
         <a href={href} key={key} target="_blank" rel="noopener noreferrer">
             {text}
         </a>
     );
 
-    // What follows is for comments under a post, when a change is made, it refreshes
+   
     useEffect(() => {
         let unsubscribe;
         if (postId) {
@@ -49,28 +49,28 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
     }
 
     function deletePost(postId) {
-        // event.preventDefault();
+        
         
         db.collection("posts").doc(postId).delete().then(function() {
             console.log("Document successfully deleted!");
         }).catch(function(error) {
             console.log("Error removing document: ", error);            
         });
-        // Get a reference to the storage service, which is used to create references in your storage bucket
+       
         var storage = firebase.storage();
 
-        // Create a storage reference from our storage service
+       
         var storageRef = storage.ref();
 
-        // Create a reference to the file to delete
+       
         var desertRef = storageRef.child('images/'+imagename);
 
-        // Delete the file
+        
         desertRef.delete().then(function() {
-        // File deleted successfully
+       
     
         }).catch(function(error) {
-        // Uh-oh, an error occurred!
+        
 
         });
 
@@ -78,8 +78,6 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
 
 
     function deleteComment(commentToDel) {
-
-        // Spent a whole fucking night and most of an afternoon trying to figure this one out!!!!
     
         db.collection("posts")
         .doc(postId)
@@ -97,11 +95,11 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
       }
 
     function backtotop(){
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        document.body.scrollTop = 0; 
+        document.documentElement.scrollTop = 0; 
     }
 
-    // Function to view others' posts
+    
     function viewtheirstuff(userselected) { 
         viewwhichuser(userselected);
         backtotop();
@@ -124,7 +122,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                     ( user && username === auth.currentUser.displayName || user && auth.currentUser.email === "admin@gmail.com" )
                     &&
                     <div className="delete__Post">
-                    {/* This is where the 3 dots menu appear to delete POSTS */}
+                   
                         <MenuPopupState 
                             lang={lang}
                             datatopass={postId}
@@ -140,7 +138,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
             <div className="post__imgcontainer">
 
                 { 
-                // Check if the image is a video instead of an image, and if so, use the VIDEO tag instead
+                
                 (imageUrl.includes(".mp4")) || (imageUrl.includes(".MP4")) || (imageUrl.includes(".mov")) || (imageUrl.includes(".MOV")) 
                 ? 
                     (
@@ -151,7 +149,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                     )
                     : 
                     (
-                    // If it is NOT a video, load it as an image:
+                    
                     <img className="post__image" src={imageUrl} alt="" />
                     )
                 }
@@ -162,7 +160,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
            
             <h4 className="post__text breakfix">
                 {
-                caption && // Only if the caption field is NOT empty, display it along with the user name
+                caption && 
                     <Linkify componentDecorator={componentDecorator}>
                         <strong onClick={viewtheirstuff.bind(this, username)}>{username}: </strong>{caption}
                     </Linkify>
@@ -189,7 +187,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                                 &&
                                 <div className="comment__morevert">
                                     
-                                    {/* This is where the 3 dots menu appear to delete comments */}
+                                    
                                     <MenuPopupState 
                                         lang={lang}
                                         datatopass={comment.timestamp}
@@ -206,7 +204,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
             </div>
 
 
-                {user && ( // Only display this comment form input if the user has logged in
+                {user && ( 
                     <form className="post__commentBox">
                         <Textarea
                             className="post__input"
