@@ -49,7 +49,7 @@ const Spinner = () => (
 );
 
 
-// Determine language from the user's computer or browser
+
 
 const locale =() => {
   
@@ -79,34 +79,34 @@ function App() {
   const [singlepostid, setSinglePostId] = useState('');
   const [lang, setLang] = useState(locale);
 
-  // This is to toggle from FR to EN
+  
   const toggleLang = () => setLang(!lang);
 
 
-  // The below is what checks if you are logged in or not, and keeps you logged in on refresh
+  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        // if user has logged in...
+       
         setUser(authUser);
 
       } else {
-        // if user has logged out... 
+        
         setUser(null);
       }
       
     })
 
     return () => {
-      // perform some cleanup actions
+      
       unsubscribe();
     }
   }, [user, username]);
 
   useEffect(() => {
-      // This is where the code runs
+      
       db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
-        // every time a new post is added, this code fires up
+       
         setPosts(snapshot.docs.map(doc => ({
           id: doc.id,
           post: doc.data()
@@ -114,22 +114,11 @@ function App() {
       })
   }, []);
 
-  // To automatically change language text desc - Not necessary for now actually
-/*   useEffect((toggleLang) => {
-        // To toggle lang
-        if (lang) {
-          // If user clicked FR
-          setLang("FR")
-          console.log(lang)
-        } else {
-          setLang("EN")
-          console.log(lang)
-        }  
-  })
- */
+  
+
   const signUp = (event) => {
 
-    // This is to prevent the page from refreshing when we submit the form
+    
     event.preventDefault();
     auth.createUserWithEmailAndPassword(email, password)
     .then((authUser) => {
@@ -139,10 +128,10 @@ function App() {
     })
     .catch((error) => alert(error.message));
 
-    // Set user so that footer changes accordingly
+   
     
 
-    // Close modal
+    
     setOpen(false);
   }
 
@@ -152,7 +141,7 @@ function App() {
       .signInWithEmailAndPassword(email, password)
       .catch((error) => alert(error.message));
     
-    // Close modal
+   
     setOpenSignIn(false);
   }
 
@@ -291,7 +280,7 @@ function App() {
         <div className="app__posts">
           <div className="app__postsLeft">
             {
-            // If "View my own posts button was clicked AND user is logged in"
+            
             (viewmine && user)  ? (
               
               <div className="post__thumbs">
@@ -299,8 +288,7 @@ function App() {
              {
 
               posts.filter(({id, post}) => post.username === auth.currentUser.displayName).map(({id, post}) => (
-                
-                // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
+              
                 
                 <LazyLoad 
                   key={id}
@@ -326,7 +314,7 @@ function App() {
               </div>
 
 
-              ) : (viewwhichuser)  ? ( // If we want to see other people's list of posts
+              ) : (viewwhichuser)  ? ( 
                               
                   <div className="post__thumbs">
                   
@@ -352,17 +340,14 @@ function App() {
                         />
                       </div>
                     </LazyLoad> 
-                    // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
-
+                   
 
                   ))}
                   </div>
                           
 
             ) : viewsinglepost ? ( 
-
-              // If a single post was selected
-        
+                    
               posts.filter(({id, post}) => id === singlepostid).map(({id, post}) => (
                 <Post 
                     key={id}
@@ -380,7 +365,7 @@ function App() {
                   
             ) : (
 
-              // Else if no posts were selected at all, simply default to display all posts as usual
+              
             
               posts.map(({id, post}) => (
 
@@ -430,8 +415,7 @@ function App() {
 
       <footer className="footer">
 
-        {/* This is where people can upload stuff */}
-        {/* below line used to be user?.displayName ? (  - but it was giving issues so i changed it */}
+       
         {user ? (
 
           <div>
@@ -443,7 +427,7 @@ function App() {
                 lang={lang}
                 username={user.displayName} 
                 closemodal={setOpenImageUpload} 
-                // Passing the 2 below so that I can reset those once upload is done
+               
                 viewwhichuser={setViewWhichUser}
                 viewsinglepost={setViewSinglePost}
 
